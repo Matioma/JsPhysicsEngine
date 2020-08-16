@@ -1,51 +1,54 @@
-import {Circle} from './Figures.js';
 import {Vector2} from "./math.js";
+import { Particle } from './Particle.js';
 
 
 export const gameCanvas = document.getElementById("gameCanvas");
 export const context2D = gameCanvas.getContext('2d');
 
-
-let Figures = new Array;
-
+let particles = new Array;
+let Colliders = new Array;
 
 StartGame();
 
-function SetUpGame(){
-    Figures.push(new Circle(50,50,20));
-    Figures.push(new Circle(20,20,20));
+Testing();
+
+
+
+function Testing(){
+    let vector = new Vector2(4,4);
+    console.log(vector.toString());
+    console.log("Length is:" +vector.magnitude());
+    
+    let normalizedVector = vector.normalized();
+    console.log("normalizedVector: " + normalizedVector.toString());
+    console.log("initial vector is: " + vector.toString());
+    
+
+
 }
-
-
 function StartGame(){
     SetUpGame();
     Loop();
 }
 
+function SetUpGame(){
+    particles.push(new Particle(50,50,20));
+
+    gameCanvas.width = 1200;
+    gameCanvas.height =720;    
+}
+
+
 function Loop(){
-    window.requestAnimationFrame(Loop);
+    context2D.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
     Update();
-    Draw();
+    window.requestAnimationFrame(Loop);
 }
 
-
-
-function Draw(){
-    context2D.clearRect(0,0,gameCanvas.width,gameCanvas.width);
-    for(var i =0; i<Figures.length;i++){
-        Figures[i].draw();
-    }
-}
 
 function Update(){
-    for(var i =0; i<Figures.length;i++){
-        Figures[i].update();
+    for (var i=0; i< particles.length;i++){
+        particles[i].update();
     }
 } 
-function drawCircle( X, Y, radius){
-    context2D.beginPath();
-    context2D.arc(X, Y, radius, 0, 2 * Math.PI);
-    context2D.stroke();
-}
-
