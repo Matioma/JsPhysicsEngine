@@ -8,15 +8,21 @@ export const context2D = gameCanvas.getContext('2d');
 let particles = new Array;
 let Colliders = new Array;
 
+
+let CurrentTime =0;
+export let DeltaTime=0;
+
 StartGame();
 
-Testing();
+//Testing();
 
 
 
 function Testing(){
     let vector = new Vector2(4,4);
-    console.log(vector.toString());
+
+    vector.multiply(2.5);
+    console.log("multiplied vector is:"+vector.toString());
     console.log("Length is:" +vector.magnitude());
     
     let normalizedVector = vector.normalized();
@@ -27,6 +33,8 @@ function Testing(){
 
 }
 function StartGame(){
+    CurrentTime = (new Date).getTime();
+    
     SetUpGame();
     Loop();
 }
@@ -40,10 +48,14 @@ function SetUpGame(){
 
 
 function Loop(){
-    context2D.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+    DeltaTime = (new Date).getTime()-CurrentTime;
+    CurrentTime = (new Date).getTime();
 
+    context2D.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+    
     Update();
     window.requestAnimationFrame(Loop);
+    
 }
 
 
