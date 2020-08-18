@@ -4,10 +4,18 @@ export class Vector2{
         this.y = y;
     }
 
+    static Copy(vector2){
+        return new Vector2(vector2.x, vector2.y);
+    }
+
     add(vector){
         this.x += vector.x;
         this.y += vector.y;
-
+    }
+    add(vector){
+        this.x += vector.x;
+        this.y += vector.y;
+        return this;
     }
     subtract(vector){
         this.x -= vector.x;
@@ -26,10 +34,6 @@ export class Vector2{
     dotProduct(vector){
         return this.x*vector.x + this.y* vector.y;
     }
-    // crossProduct(vector){
-    //     return new Vector2(this.x*)
-
-    // }
 
     invert(){
         this.x = -this.x;
