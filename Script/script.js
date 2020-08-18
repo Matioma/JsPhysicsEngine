@@ -1,5 +1,6 @@
 import {Vector2} from "./math.js";
 import { Particle } from './Particle.js';
+import {Balistic, WeaponTypes} from "./Balistic.js"
 
 
 export const gameCanvas = document.getElementById("gameCanvas");
@@ -11,6 +12,10 @@ let Colliders = new Array;
 
 let CurrentTime =0;
 export let DeltaTime=0;
+export function GetDeltaTime(){
+    return DeltaTime/1000;
+}
+
 
 StartGame();
 
@@ -40,7 +45,8 @@ function StartGame(){
 }
 
 function SetUpGame(){
-    particles.push(new Particle(50,50,20));
+    // particles.push(new Particle(50,50,20));
+    particles.push(new Balistic(WeaponTypes.PISTOL))
 
     gameCanvas.width = 1200;
     gameCanvas.height =720;    
@@ -52,8 +58,8 @@ function Loop(){
     CurrentTime = (new Date).getTime();
 
     context2D.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-    
     Update();
+
     window.requestAnimationFrame(Loop);
     
 }
