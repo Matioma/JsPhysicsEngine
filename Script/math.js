@@ -22,8 +22,12 @@ export class Vector2{
         this.y -= vector.y;
     }
     multiply(scalar){
-        this.x *= scalar;
-        this.y *= scalar;
+        let x = this.x * scalar;
+        let y = this.y * scalar;
+        //  this.x *= scalar;
+        // this.y *= scalar;
+
+        return new Vector2(x,y);
     }
 
     componentProduct(vector){
